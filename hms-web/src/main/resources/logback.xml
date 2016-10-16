@@ -1,0 +1,68 @@
+<configuration scan="true" scanPeriod="30 seconds">
+
+	<property file="pom.properties" />
+	<!-- Inserting from JNDI -->
+	<!-- <insertFromJNDI env-entry-name="java:comp/env/appName" as="appName" 
+		/> -->
+
+	<!-- including.. -->
+	<!--
+		<include file="src/main/java/chapters/configuration/includedConfig.xml"/> 
+		<include resource="includedConfig.xml"/> 
+		<include url="http://some.host.com/includedConfig.xml"/> 
+	-->
+	<contextName>${projectName:-hms}</contextName>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>[%thread] %highlight(%-5level) %cyan(%logger{15}) - %msg %n</pattern>
+			<!-- <pattern>%d %contextName [%t] %level %logger{36} - %msg%n</pattern> -->
+		</encoder>
+	</appender>
+	
+	<!--Daily rolling file appender -->
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>d://logFile.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>logFile.%d{yyyy-MM-dd}.log</FileNamePattern>
+		</rollingPolicy>
+ 
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</Pattern>
+		</layout>
+	</appender>
+
+	<root level="debug">
+		<appender-ref 
+		ref="STDOUT" />
+		<appender-ref ref="FILE" />
+	</root>
+
+	<logger name="org.springframework"> 
+		<appender-ref ref="FILE" />
+		<appender-ref 
+		ref="STDOUT" />
+	</logger>
+	<logger name="com.smrp.hms"> 
+		<appender-ref ref="FILE" />
+		<appender-ref 
+		ref="STDOUT" />
+	</logger>
+	
+	<!-- Example showing redirecting logs to different output using additivity 
+		flag -->
+	<!-- <logger name="chapters.configuration.Foo" additivity="false"> <appender-ref 
+		ref="FILE" /> </logger> -->
+
+	<!-- Conditional processing -->
+	<!-- if-then form -->
+	<!-- 
+	<if condition="some conditional expression">
+		<then>
+			...
+		</then>
+	</if>
+	 -->
+</configuration>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.smrp</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<artifactId>hms</artifactId>
+	</parent>
+	<groupId>com.smrp</groupId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>hms-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<build>
+		<finalName>hms-web</finalName>
+	</build>
+	<artifactId>hms-web</artifactId>
+	<dependencies>
+		<dependency>
+			<groupId>com.smrp</groupId>
+			<artifactId>hms-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+	</dependencies>
+</project>
